@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sujan Varma - AI-Powered Salesforce Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(64, 224, 208, 0.3) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #64ffda, #7c4dff, #ff4081);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .verification-badge::before {
+            content: "✓";
+            background: linear-gradient(135deg, #4caf50, #8bc34a);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .ai-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .ai-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        }
+
+        .ai-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(100, 255, 218, 0.3);
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.1);
+        }
+
+        .ai-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #64ffda;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #64ffda, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .experience-section {
+            margin: 4rem 0;
+        }
+
+        .experience-timeline {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .experience-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: linear-gradient(135deg, #64ffda, #7c4dff);
+            border-radius: 2px;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            border-color: rgba(100, 255, 218, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .experience-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-header h3 {
+            font-size: 1.4rem;
+            color: #64ffda;
+            margin-bottom: 0.5rem;
+        }
+
+        .company {
+            display: block;
+            font-size: 1.1rem;
+            color: #ff4081;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .duration, .location {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 0.2rem;
+        }
+
+        .experience-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-details li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .experience-details li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+            font-size: 0.8rem;
+        }
+
+        .certifications {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 3px solid #64ffda;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-item:hover {
+            transform: translateX(10px);
+        }
+
+        .cert-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #64ffda, #7c4dff);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(100, 255, 218, 0.05);
+            border-radius: 30px;
+            margin: 4rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #64ffda, #7c4dff);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.3);
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(100, 255, 218, 0.6);
+            border-radius: 50%;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { 
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ai-cards, .cert-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements"></div>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="verification-badge">Verified AI Specialist</div>
+                <h1>Sujan Varma</h1>
+                <p class="subtitle">Senior Salesforce Developer</p>
+                <p>Transforming businesses through intelligent CRM solutions and cutting-edge AI integration</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="ai-cards">
+            <div class="ai-card">
+                <h3>🤖 AI-Powered CRM</h3>
+                <p>Leverage Einstein AI and custom machine learning models to create predictive analytics, automated workflows, and intelligent customer insights that drive revenue growth.</p>
+            </div>
+            <div class="ai-card">
+                <h3>⚡ Lightning Web Components</h3>
+                <p>Build responsive, modern interfaces with advanced JavaScript frameworks, creating seamless user experiences that integrate with AI services and external APIs.</p>
+            </div>
+            <div class="ai-card">
+                <h3>🔗 Integration Excellence</h3>
+                <p>Connect Salesforce with any system using REST APIs, SOAP services, and middleware solutions, creating unified data ecosystems for enterprise clients.</p>
+            </div>
+        </div>
+
+        <div class="experience-section">
+            <h2 class="section-title">Experience at Stryker, Global Atlantic & Qualcomm</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Senior Salesforce Developer</h3>
+                        <span class="company">Stryker</span>
+                        <span class="duration">Jan 2024 - Present · 1 yr 9 mos</span>
+                        <span class="location">Kalamazoo, Michigan</span>
+                    </div>
+                    <div class="experience-details">
+                        <p>Leading enterprise-level Salesforce implementations with advanced customizations:</p>
+                        <ul>
+                            <li>Developed Lightning Web Components (LWCs) and Aura Framework applications for complex business processes</li>
+                            <li>Implemented CPQ solutions using Salesforce CPQ and Apttus CLM for streamlined quote-to-cash processes</li>
+                            <li>Built Apex REST web services for seamless integration with external applications via DataPower</li>
+                            <li>Configured Service Cloud Console and Email-to-Case for enhanced customer support operations</li>
+                            <li>Architected batch processing solutions for data archiving and automated business workflows</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Salesforce Developer/Administrator</h3>
+                        <span class="company">Global Atlantic Financial Group</span>
+                        <span class="duration">Sep 2022 - Jul 2023 · 11 mos</span>
+                        <span class="location">Boston, Massachusetts</span>
+                    </div>
+                    <div class="experience-details">
+                        <p>Delivered comprehensive Salesforce solutions for financial services:</p>
+                        <ul>
+                            <li>Created modern Enterprise Lightning Apps with Lightning Design System and App Builder</li>
+                            <li>Developed custom Visualforce components and migrated legacy S-Controls to modern platforms</li>
+                            <li>Built Salesforce1 Mobile Apps with Lightning Components for enhanced user mobility</li>
+                            <li>Implemented automated workflows, approval processes, and custom business logic</li>
+                            <li>Integrated web services to extract and display data from external financial systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Salesforce Developer/Administrator</h3>
+                        <span class="company">Qualcomm</span>
+                        <span class="duration">Apr 2020 - Jul 2022 · 2 yrs 4 mos</span>
+                        <span class="location">India</span>
+                    </div>
+                    <div class="experience-details">
+                        <p>Provided end-to-end Salesforce development and administration for global technology leader:</p>
+                        <ul>
+                            <li>Conducted detailed technical and business requirements analysis for CRM optimization</li>
+                            <li>Designed custom objects, validation rules, and complex approval processes</li>
+                            <li>Implemented Salesforce Community Cloud for employee, customer, and partner engagement</li>
+                            <li>Migrated components to Lightning Experience and integrated REST APIs for data synchronization</li>
+                            <li>Provided comprehensive user training and ongoing system support across global teams</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="certifications">
+            <h2 class="section-title">AI & Salesforce Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">🎯</div>
+                    <div>
+                        <h4>Salesforce Certified AI Associate</h4>
+                        <p>January 2025</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">🚀</div>
+                    <div>
+                        <h4>Salesforce Certified AI Specialist</h4>
+                        <p>January 2025</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">⚙️</div>
+                    <div>
+                        <h4>Salesforce Certified Administrator</h4>
+                        <p>Professional Level</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">👨‍💻</div>
+                    <div>
+                        <h4>Salesforce Platform Developer I</h4>
+                        <p>Advanced Development</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Build the Future of CRM?</h2>
+            <p style="margin: 1rem 0; opacity: 0.9;">Let's discuss how AI can transform your business processes</p>
+            <button class="cta-button" onclick="window.open('mailto:contact@sujanvarma.ai')">Start a Project</button>
+            <button class="cta-button" onclick="window.open('https://calendly.com/sujanvarma')">Schedule Consultation</button>
+        </div>
+    </section>
+
+    <script>
+        // Create floating particles
+        function createFloatingElements() {
+            const container = document.querySelector('.floating-elements');
+            setInterval(() => {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                element.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(element);
+                
+                setTimeout(() => {
+                    element.remove();
+                }, 8000);
+            }, 300);
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingElements();
+            
+            // Add smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add scroll-triggered animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.ai-card, .cert-item, .experience-item').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Add CSS for fade in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
